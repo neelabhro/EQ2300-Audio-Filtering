@@ -18,6 +18,7 @@ h = sinc(2*nu_c_low*(n-M));
 A = 1/sum(h);
 h = h * A;  % Normalize. H(0) = sum of h[n], so shoot for H(0) = 1
 stem(h);
+title('Impulse Response');
 xlabel('n');
 ylabel('h[n]');
 figure;
@@ -35,7 +36,7 @@ H_dB = 10 * log10(abs(H));
 plot(nu(1:N_fft/2), abs(H(1:N_fft/2)));
 hold on
 plot(nu(1:N_fft/2), H_ideal(1:N_fft/2));
-title('Impulse Response');
+
 xlabel('n');
 ylabel('h_L[n]');
 figure;
@@ -52,10 +53,10 @@ figure;
 
 %% Plot filter freq response - compare with design specifications
 
-plot(nu(1:(N_fft/2)), H_dB(1:(N_fft/2)))
-xline(nu_c_low, 'red')
-xline(nu_c_high, 'red')
-yline(-40, 'red')
+plot(nu(1:(N_fft/2)), H_dB(1:(N_fft/2)));
+xline(nu_c_low, 'red');
+xline(nu_c_high, 'red');
+yline(-40, 'red');
 title('Filter Frequency Response');
 figure;
 
@@ -67,16 +68,16 @@ w_bartlett = window(@bartlett,M);
 w_hamming = window(@hamming, M);
 w_chebysev = window(@chebwin, M);
 
-subplot(1,3,1)
-stem(w_bartlett, 'filled')
-title('Bartlett')
-subplot(1,3,2)
-stem(w_hamming, 'filled')
-title('Hamming')
-subplot(1,3,3)
-stem(w_chebysev, 'filled')
-title('Chebysev')
-set(gcf,'Position',[0 300 1200 300])
+subplot(1,3,1);
+stem(w_bartlett, 'filled');
+title('Bartlett');
+subplot(1,3,2);
+stem(w_hamming, 'filled');
+title('Hamming');
+subplot(1,3,3);
+stem(w_chebysev, 'filled');
+title('Chebysev');
+set(gcf,'Position',[0 300 1200 300]);
 
 figure;
 %% Compare windows
@@ -94,13 +95,13 @@ H_w = fft(h_w,N_fft);
 H_w_dB = 20 * log10(abs(H_w));
 
 
-subplot(1,3,1)
-plot(nu(1:(N_fft/2)), H_w_dB(1:(N_fft/2)))
-title('Bartlett')
-xline(nu_c_low, 'red')
-xline(nu_c_high, 'red')
-yline(-40, 'red')
-ylim([-140 0])
+subplot(1,3,1);
+plot(nu(1:(N_fft/2)), H_w_dB(1:(N_fft/2)));
+title('Bartlett');
+xline(nu_c_low, 'red');
+xline(nu_c_high, 'red');
+yline(-40, 'red');
+ylim([-140 0]);
 
 % Hamming's window
 
@@ -115,13 +116,13 @@ nu = linspace(0,1,N_fft);
 H_w = fft(h_w,N_fft);
 H_w_dB = 20 * log10(abs(H_w));
 
-subplot(1,3,2)
-plot(nu(1:(N_fft/2)), H_w_dB(1:(N_fft/2)))
-title('Hamming')
-xline(nu_c_low, 'red')
-xline(nu_c_high, 'red')
-yline(-40, 'red')
-ylim([-140 0])
+subplot(1,3,2);
+plot(nu(1:(N_fft/2)), H_w_dB(1:(N_fft/2)));
+title('Hamming');
+xline(nu_c_low, 'red');
+xline(nu_c_high, 'red');
+yline(-40, 'red');
+ylim([-140 0]);
 
 % Chebysevs's window
 
@@ -136,11 +137,11 @@ nu = linspace(0,1,N_fft);
 H_w = fft(h_w,N_fft);
 H_w_dB = 20 * log10(abs(H_w));
 
-subplot(1,3,3)
-plot(nu(1:(N_fft/2)), H_w_dB(1:(N_fft/2)))
-title('Chebysev')
-xline(nu_c_low, 'red')
-xline(nu_c_high, 'red')
-yline(-40, 'red')
-ylim([-140 0])
-set(gcf,'Position',[0 300 1200 300])
+subplot(1,3,3);
+plot(nu(1:(N_fft/2)), H_w_dB(1:(N_fft/2)));
+title('Chebysev');
+xline(nu_c_low, 'red');
+xline(nu_c_high, 'red');
+yline(-40, 'red');
+ylim([-140 0]);
+set(gcf,'Position',[0 300 1200 300]);
